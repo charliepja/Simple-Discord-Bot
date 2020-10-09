@@ -12,11 +12,11 @@ module.exports.populateCommands = async (folder, collection) => {
 	return;
 };
 
-module.exports.findAndRunCommand = async (client, message, args, command, collection, permission) => {
+module.exports.findAndRunCommand = async (client, message, args, helper, command, collection, permission) => {
 	if(message.member.hasPermission(permission) && collection.has(command)) {
 		try {
 			const getCommand = collection.get(command);
-			getCommand.run(client, message, args);
+			getCommand.run(client, message, args, helper);
 			return;
 		}
 		catch(error) {

@@ -21,14 +21,28 @@ client.on('message', async (message) => {
 	if(message.author.bot) return;
 	if(message.channel.type !== 'text') return;
 
+	if(message.mentions.roles.size > 0) {
+		const pingRole = await settings.prepare('SELECT * FROM settings WHERE guildID = ? AND setting_name = ?').get(message.guild.id, 'pingrole');
+		if(!pingRole) return;
+		if(message.mentions.roles.first().id === pingRole.setting_value) {
+			try {
+				await functions.teamPing(client, message, settings);
+				message.delete({ timeout: 100 });
+			}
+			catch(error) {
+				console.log(error);
+			}
+		}
+	}
+
 	const prefix = await functions.getPrefix(message.guild.id, settings);
 	const split = message.content.split(/ +/g);
 	const commandName = split[0].slice(prefix.length).toLowerCase();
 	const args = split.slice(1);
 
-	functions.findAndRunCommand(client, message, args, commandName, client.publicCommands, 'SEND_MESSAGES');
-	functions.findAndRunCommand(client, message, args, commandName, client.moderatorCommands, 'MANAGE_ROLES');
-	functions.findAndRunCommand(client, message, args, commandName, client.adminCommands, 'ADMINISTRATOR');
+	functions.findAndRunCommand(client, message, args, functions, commandName, client.publicCommands, 'SEND_MESSAGES');
+	functions.findAndRunCommand(client, message, args, functions, commandName, client.moderatorCommands, 'MANAGE_ROLES');
+	functions.findAndRunCommand(client, message, args, functions, commandName, client.adminCommands, 'ADMINISTRATOR');
 });
 
 client.login(process.env.TOKEN);
