@@ -1,14 +1,15 @@
 {
   "name": "sample_bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A small discord bot",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serverDev": "nodemon index.js"
+    "serverDev": "nodemon index.js",
+	"bot": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Charlie Anderson",
+  "license": "GNU GPLv3",
   "dependencies": {
     "better-sqlite3": "^5.4.3",
     "discord.js": "^12.3.1",
