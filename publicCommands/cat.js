@@ -6,8 +6,8 @@ module.exports.run = async (client, message, args) => {
 	const fetchKitty = await fetch(baseURL);
 	const kittyJSON = await fetchKitty.json();
 
-	const embed = new Discord.RichEmbed()
-		.setColor('#c5cbe1')
+	const embed = new Discord.MessageEmbed()
+		.setColor('#8bb9dd')
 		.setTimestamp();
 
 	if(kittyJSON.length > 0) {

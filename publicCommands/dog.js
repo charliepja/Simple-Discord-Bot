@@ -7,8 +7,8 @@ module.exports.run = async (client, message, args) => {
 	const fetchPayload = await fetch(baseURL);
 	const responseJSON = await fetchPayload.json();
 
-	const embed = new Discord.RichEmbed()
-		.setColor('#c5cbe1')
+	const embed = new Discord.MessageEmbed()
+		.setColor('#8bb9dd')
 		.setTimestamp();
 
 	if(responseJSON.status === 'success') {

@@ -3,7 +3,7 @@ const path = require('path');
 const settings = require(path.resolve('sql.js'));
 
 module.exports.run = async (client, message, args) => {
-	const possibleSettings = ['prefix', 'muterole'];
+	const possibleSettings = ['prefix', 'muterole', 'pingchannel', 'pingrole'];
 	if(args.length < 2) return message.channel.send('Error: Please supply setting name and setting value!');
 	const settingToChange = args[0].toLowerCase();
 	const settingValue = args[1];
@@ -22,8 +22,8 @@ module.exports.run = async (client, message, args) => {
 		if(err) return message.channel.send(`Error! ${err.message}`);
 	}
 
-	const embed = new Discord.RichEmbed()
-		.setColor('#c5cbe1')
+	const embed = new Discord.MessageEmbed()
+		.setColor('#8bb9dd')
 		.setDescription(`${settingToChange} has been configured with value ${settingValue}`)
 		.setTimestamp();
 

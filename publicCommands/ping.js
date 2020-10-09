@@ -4,8 +4,8 @@ module.exports.run = async (client, message, args) => {
 	try {
 		const getPing = await message.client.ping;
 
-		const embed = new Discord.RichEmbed()
-			.setColor('#c5cbe1')
+		const embed = new Discord.MessageEmbed()
+			.setColor('#8bb9dd')
 			.setDescription(`Average heartbeat ping: ${getPing.toFixed(2)} ms`)
 			.setTimestamp();
 

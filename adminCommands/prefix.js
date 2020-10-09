@@ -19,8 +19,8 @@ module.exports.run = async (client, message, args) => {
 		if(err) return message.channel.send(`Error! ${err.message}`);
 	}
 
-	const embed = new Discord.RichEmbed()
-		.setColor('#c5cbe1')
+	const embed = new Discord.MessageEmbed()
+		.setColor('#8bb9dd')
 		.setDescription(`Prefix has been changed to ${newPrefix}`)
 		.setTimestamp();
 

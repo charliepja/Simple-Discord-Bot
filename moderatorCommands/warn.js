@@ -3,8 +3,9 @@ const moment = require('moment');
 const path = require('path');
 const settings = require(path.resolve('sql.js'));
 
-module.exports.run = async (client, message, args) => {
-	const getMember = message.mentions.members.first() || message.guild.members.get(args[0]);
+module.exports.run = async (client, message, args, helper) => {
+	const getMember = await helper.getUser(message.client, message, args[0]);
+	if(getMember.id === message.author.id) return;
 	const getReason = args.slice(1).join(' ');
 
 	if(!getMember || getReason.length < 1) return message.channel.send('Error: Incorrect parameters sent!');
@@ -27,8 +28,8 @@ module.exports.run = async (client, message, args) => {
 		if(err) return message.channel.send(`Error! ${err.message}`);
 	}
 
-	const embed = new Discord.RichEmbed()
-		.setColor('#c5cbe1')
+	const embed = new Discord.MessageEmbed()
+		.setColor('#8bb9dd')
 		.setDescription(`<@${getMember.id}> has been warned for ${getReason} by <@${message.author.id}>\n\n<@${getMember.id}> has a total of ${totalWarnings} warnings`)
 		.setTimestamp();
 
